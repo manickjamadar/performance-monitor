@@ -1,0 +1,52 @@
+{
+  "root": "apps/backend-client",
+  "sourceRoot": "apps/backend-client/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/backend-client",
+        "main": "apps/backend-client/src/main.ts",
+        "tsConfig": "apps/backend-client/tsconfig.app.json",
+        "assets": ["apps/backend-client/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/backend-client/src/environments/environment.ts",
+              "with": "apps/backend-client/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "backend-client:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/backend-client/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/backend-client"],
+      "options": {
+        "jestConfig": "apps/backend-client/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
