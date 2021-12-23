@@ -2,10 +2,12 @@ import {Server as HttpServer} from 'http';
 import { Server } from "socket.io";
 import { IMachine, IoServer} from '@performance-monitor/domain/interfaces';
 import Machine from './model/machine';
+import { RedisClientType } from 'redis';
+import ActivatedMachine from './services/activated-machine';
 const tokens = new Set(["h5io2354ioh245","adsfhio2523hi34io"]);
-const activatedMachines = new Set<string>();
-const initSocketServer = async(server:HttpServer)=>{
+const initSocketServer = async(server:HttpServer,redisClient:RedisClientType)=>{
     try {
+        const activatedMachines = new ActivatedMachine(redisClient);
         const io:IoServer = new Server(server,{cors:{origin:"*"}});
         const machineIo = io.of("/machine");
         const uiIo = io.of("/ui");
@@ -15,7 +17,8 @@ const initSocketServer = async(server:HttpServer)=>{
                 const machines:IMachine[] = await Machine.find({});
                 //emit all machine liust
                 socket.emit("machine:list",machines);
-                socket.emit("activated-machine:address:list",Array.from(activatedMachines.values()));
+                const activatedAddresses = await activatedMachines.values();
+                socket.emit("activated-machine:address:list",activatedAddresses);
             } catch (error) {
                 console.log("All machine fetch failed");
             }
