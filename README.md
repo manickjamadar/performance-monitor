@@ -55,6 +55,6 @@ Contributions to Performance Monitor are more than welcome! If you encounter any
 Performance Monitor is open-source and released under the MIT License. Feel free to use, modify, and distribute this project as per the terms of the license.
 
 ## Contact
-If you have any questions or inquiries about Performance Monitor, please feel free to contact me at [manickjamadar@gmail.com](mailto:manickjamadar@gmail.com). I'm always excited to discuss potential collaborations or new opportunities.
+If you have any questions or inquiries about Performance Monitor, please feel free to contact me at [contact@manickjamadar.com](mailto:contact@manickjamadar.com). I'm always excited to discuss potential collaborations or new opportunities.
 
 Thank you for considering Performance Monitor. I hope this application demonstrates my skills and passion for full-stack development. I look forward to the opportunity of working together and contributing to future projects.
